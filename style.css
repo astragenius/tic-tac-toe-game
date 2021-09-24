@@ -12,3 +12,201 @@ html {
     font-size: 'Roboto', sans-serif;
 }
 
+main {
+
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section {
+
+    /* border: 2px solid black; */
+    
+}
+
+.game__board__score {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 79px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: #7377DD;
+   /*  border: 1px solid magenta; */
+}
+
+.heading {
+
+    padding: 5px;
+    font-size: 25px;
+    color: #fff;
+   
+}
+.player__wrapper{
+
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+}
+
+.player {
+
+    margin-right: 20px;
+}
+
+.player__wrapper > * {
+
+    font-size: 20px;
+}
+
+
+
+
+.game_board {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 326px;
+    width: 326px;
+    border: 1px solid brown;
+}
+
+
+
+.cell{
+
+    position: relative;
+    border: 1px solid black;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell.x::before,
+.cell.x::after,
+.game_board.x .cell:not(.x):not(.circle):hover::before,
+.game_board.x .cell:not(.x):not(.circle):hover::after {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 100px;
+    background-color: black;
+}
+
+.cell.x::before,
+.game_board.x .cell:not(.x):not(.circle):hover::before {
+
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.game_board.x .cell:not(.x):not(.circle):hover::after {
+
+    transform: rotate(-45deg);
+}
+
+
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after {
+
+    background-color: black;
+}
+
+.cell.circle::before,
+.cell.circle::after {
+
+    background-color: black;
+}
+
+.game_board.x .cell:not(.x):not(.circle):hover::before,
+.game_board.x .cell:not(.x):not(.circle):hover::after {
+
+    background-color: lightgray;
+
+}
+
+.game_board.circle .cell:not(.x):not(.circle):hover::before,
+.game_board.circle .cell:not(.x):not(.circle):hover::after {
+
+    background-color: lightgray;
+
+}
+
+
+
+.cell.circle::before,
+.cell.circle::after,
+.game_board.circle .cell:not(.x):not(.circle):hover::before,
+.game_board.circle .cell:not(.x):not(.circle):hover::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.circle::before,
+.game_board.circle .cell:not(.x):not(.circle):hover::before {
+
+    height: 90px;
+    width: 90px;
+    
+
+}
+
+.cell.circle::after,
+.game_board.circle .cell:not(.x):not(.circle):hover::after {
+
+    height: 65px;
+    width: 65px;
+    background-color: white;
+
+}
+
+
+
+
+
+
+
+
+.game__board__footer {
+
+    height: 79px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #7377DD;
+    /* border: 1px solid magenta; */
+}
+
+
+
+button {
+    padding: 12px;
+    min-width: 123px;
+    font-size: 18px;
+    max-height: 50px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #AB8C0C;
+}
+
+button:hover {
+
+    background-color: #786208;
+}
