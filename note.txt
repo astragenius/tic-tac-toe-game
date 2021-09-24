@@ -76,3 +76,12 @@ function um zuüberprüfen ob jemand gewonnen hatt oder ein "tie" ist.
 
 
         
+
+
+// Hinweise
+
+Um nachzuschauen ob eine bestimmte klasse auf dem html element gesetzt wurde kann man 
+
+die javascript DOM methode " tokenList.contains(token) " 
+benutzen.
+link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains

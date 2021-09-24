@@ -17,6 +17,8 @@ const Player = (name, symbol, num) => {
 
 const GameBoard = (() => {
 
+    const resetBtn = document.getElementById("resetBtn");
+
     let board = [];
 
     const createBoard = () => {
@@ -50,6 +52,27 @@ const GameBoard = (() => {
 
     }
 
+    const resetBoard = () => {
+        const cell = document.querySelectorAll('.cell');
+
+        resetBtn.addEventListener('click', function() {
+
+                cell.forEach(el => {
+
+                    if(el.classList[1] == "x"){
+
+                        el.classList.remove("x");
+                        
+                    }
+                    if(el.classList[1] == "circle") {
+
+                        el.classList.remove('circle');
+                    }
+                })
+        })
+
+    }
+
     const checkWinn = () => {
 
         // checkt das aktuelle gameBoard ob ein sieger feststeht.
@@ -59,30 +82,47 @@ const GameBoard = (() => {
 
 
 
-    return {createBoard, updateBoard}
+    return {createBoard, updateBoard, resetBoard}
 
 
 })();
 
 
+
 const Game = (() => {
+    
+    const cell = document.querySelectorAll('.cell');
 
    
 
     const init = () => {
 
+        createPlayer();
+        boardClick(cell);
+        GameBoard.resetBoard();
+        
 
     }
 
-    const boardClick = () => {
+    const boardClick = (cell) => {
+
 
         //setzt symbol wenn auf das Gameboard geklickt wird.
+        cell.forEach(el => {
+
+            el.addEventListener('click', function(e) {
+        
+                e.target.classList.add("x");
+            })
+        })
     }
 
     const createPlayer = () => {
 
         // Spieler objecte werden kreiert
-        // Player Factory Function wird aufgerufen
+        const player1 = Player("Player", "o", 0)
+        
+        
     }
 
     const renderBoard = (board) => {
@@ -98,9 +138,11 @@ const Game = (() => {
     }
 
 
-
-
+    
+    return {init}
 
 
 
 })();
+
+Game.init()
