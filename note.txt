@@ -1,0 +1,78 @@
+TIC-TAC-TOE -GAME
+
+Game Object                 (Als module pattern)
+
+    wenn Game object erstellt wird  - ruden anzahl mit Constuieren.
+
+    function menschlicher spieler muss symbol ausuchen.(x oder o spieler objecte werden generiert.);
+
+    function um eine runde zu starten.(spieler muss symbol ausuchen)
+
+    function um punkte auf dom zu rendern
+
+    function um zu überprüfen wer aktuell am zug ist.
+
+    function um spiel zubeenden wenn jemand gewonnen hatt.
+
+
+
+
+
+
+
+
+
+Player object (                                      ( FACTORY Function)
+
+        Menschliche Spieler
+            variable für spieler punkte
+            welches symbol (x oder o)
+
+        
+        Computer Spieler
+            variable für computer spieler punkte
+            welches symbol (x oder o)
+
+
+        function um punkte dem Spieler oder computer zuzuweisen.
+
+        function um punkte der Spieler abzufragen.
+
+
+
+
+        AI Spieler functionen (mit prototype vererbung auf Player object übertragen.)
+
+        function damit der Computer spieler einen random zug aufdem Spielfeld macht.
+        (je nach dem wer welches symbol der Menschliche spieler gewählt hatt)
+
+        
+
+
+
+        
+    )
+
+
+
+
+GameBoard Object                                        (als Module pattern)
+
+variable für gameboard (array)
+
+function um das gameboard zu erstellen und in das array zu pushen
+
+function um das gameboard zu resetten (wenn das spiel neugestartet wird)
+
+function umd das gameboard zu aktuallisieren
+
+function um das Gameboard im DOM zu rendern.
+
+function um auf dem Gameboard zu überprüfen welche bereiche schon mit einem symbol besetzt  sind.
+
+function um auf dem Gameboard zu ermitteln welche bereiche noch frei sind.
+
+function um zuüberprüfen ob jemand gewonnen hatt oder ein "tie" ist.
+
+
+        
