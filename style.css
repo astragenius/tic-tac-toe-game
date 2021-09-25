@@ -119,6 +119,8 @@ section {
     cursor: not-allowed;
 }
 
+
+
 .cell.x::before,
 .cell.x::after {
 
@@ -183,14 +185,15 @@ section {
 
 .game__board__footer {
 
-    height: 79px;
+   
     margin-top: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     border-radius: 10px;
     background-color: #7377DD;
-    /* border: 1px solid magenta; */
+    
 }
 
 
@@ -205,9 +208,15 @@ button {
     border: none;
     color: whitesmoke;
     background-color: #AB8C0C;
+    margin: 10px;
 }
 
 button:hover {
 
     background-color: #786208;
+}
+
+.bottomBtn > button.no {
+
+    cursor:not-allowed;
 }

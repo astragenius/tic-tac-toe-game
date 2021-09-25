@@ -27,9 +27,9 @@
             <!-- ADD x or circle to show the symbols on the game table -->
             <div class="game_board">
 
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
+                <div value ="1" class="cell x"></div>
+                <div class="cell x"></div>
+                <div class="cell x"></div>
                 <div class="cell"></div>
                 <div class="cell"></div>
                 <div class="cell"></div>
@@ -39,8 +39,15 @@
 
             </div>
             <div class="game__board__footer">
-                <button>New Game</button>
-                <button id="resetBtn">Resett</button>
+                <div class="upperBtn">
+                    <button>New Game</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+                <div class="bottomBtn">
+                    <button id="xBtn">X</button>
+                    <button id="oBtn" value="circle">O</button>
+                </div>
+                
             </div>
         </section>
 

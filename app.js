@@ -1,14 +1,27 @@
-const Player = (name, symbol, num) => {
+'use strict';
+
+const Player = (name, symbol, num, status) => {
 
     let point = num;
     const getName = () => name;
     const getSymbol = () => symbol;
     const getPoint = () => point;
-    const addPoint = (num) => point = point +num;
+    const addPoint = (num) => point = point + num;
+    const getStatus = () => status;
+    const setStatus = () => {
+
+        if(status == true) {
+            status = false;
+        }else {
+            status = true;
+        }
+        return status
+    }
  
-    return {getPoint, addPoint, getName, getSymbol}
+    return {getPoint, addPoint, getName, getSymbol, getStatus, setStatus}
 
 }
+
 
 
 
@@ -35,22 +48,6 @@ const GameBoard = (() => {
         console.table(board);
     }
 
-    const updateBoard = () => {
-
-        // sollte nur abschecken welche elemente sich auf dem board befinden
-    }
-
-    const setSymbol = (symbol, position) => {
-
-        // soll symbol im board bei angegebener position setzen
-
-    }
-
-    const checkBoard = (symbol, position) => {
-
-        // checkt das aktuelle board ab ob das symbol auf der position schon besetzt ist.
-
-    }
 
     const resetBoard = () => {
         const cell = document.querySelectorAll('.cell');
@@ -82,67 +79,102 @@ const GameBoard = (() => {
 
 
 
-    return {createBoard, updateBoard, resetBoard}
+    return {createBoard, resetBoard}
 
 
 })();
+
+
+
+
+
+
+
 
 
 
 const Game = (() => {
     
     const cell = document.querySelectorAll('.cell');
-
-   
+    const playerO = Player("PlayerO", "circle",0, false);
+    const playerX = Player("PlayerX", "x", 0, true);
+    
+    
 
     const init = () => {
 
-        createPlayer();
+        
         boardClick(cell);
         GameBoard.resetBoard();
         
+       
 
     }
 
+
+   
+
     const boardClick = (cell) => {
 
+       
 
         //setzt symbol wenn auf das Gameboard geklickt wird.
-        cell.forEach(el => {
+        cell.forEach( (el) => {
 
             el.addEventListener('click', function(e) {
-        
-                e.target.classList.add("x");
+                
+                if(playerX.getStatus() == true && e.target.classList == 'cell'){
+
+                    e.target.classList.add(playerX.getSymbol());
+                    playerX.setStatus(); // playerX == false
+                    playerO.setStatus(); // playerO == true
+                } 
+                if(playerO.getStatus() == true && e.target.classList == 'cell') {
+
+                    e.target.classList.add(playerO.getSymbol());
+                    playerO.setStatus(); // playerO == false;
+                    playerX.setStatus(); // playerX == true;
+                }
+
             })
         })
     }
 
-    const createPlayer = () => {
-
-        // Spieler objecte werden kreiert
-        const player1 = Player("Player", "o", 0)
-        
-        
-    }
-
-    const renderBoard = (board) => {
-
-        // gameboard wird im DOM geredert
-    }
-
-
-    const updateDisplay = () => {
-
-        // gameBoard wird im DOM nach jedem Spieler zug neu gerendert.
-        // aktuelles board wird vom gameBoard Objekt geholt.
-    }
-
-
     
-    return {init}
+
+    const choseSymbol = () => {
+        const xBtn = document.getElementById("xBtn");
+        const oBtn = document.getElementById("oBtn");
+
+        xBtn.addEventListener('click', function() {
+
+          
+            xBtn.classList.add("no");
+            oBtn.classList.add('no');
+        })
+
+        oBtn.addEventListener('click', function() {
+
+           
+            xBtn.classList.add("no");
+            oBtn.classList.add('no');
+        })
+
+
+
+    }
+
+   
+    
+    return {init, boardClick}
 
 
 
 })();
 
 Game.init()
+
+
+
+
+
