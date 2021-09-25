@@ -33,22 +33,6 @@ const GameBoard = (() => {
     const resetBtn = document.getElementById("resetBtn");
     const cell = document.querySelectorAll('.cell');
 
-    let board = [];
-
-    const createBoard = () => {
-        // Kreiert ein neues leeres gameBoard
-        for(var i = 0; i < 3; i++) {
-            let subArray = [];
-            board.push(subArray);
-
-            for(var j = 0; j < 3; j++) {
-
-                subArray.push("");
-            }
-        }
-        console.table(board);
-    }
-
 
     const resetBoard = () => {
         const cell = document.querySelectorAll('.cell');
@@ -98,7 +82,7 @@ const GameBoard = (() => {
 
 
 
-    return {createBoard, resetBoard, checkWinn}
+    return {resetBoard, checkWinn}
 
 
 })();
@@ -117,14 +101,17 @@ const Game = (() => {
     const cell = document.querySelectorAll('.cell');
     const playerO = Player("PlayerO", "circle",0, false);
     const playerX = Player("PlayerX", "x", 0, true);
+    let playerXScore = document.getElementById("player1");
+    let playerOScore = document.getElementById('player2');
     
-    
+   
 
     const init = () => {
 
        
         boardClick(cell);
         GameBoard.resetBoard();  
+        
     }
 
 
@@ -135,17 +122,24 @@ const Game = (() => {
 
         if(GameBoard.checkWinn(playerX.getSymbol())) {
 
+           playerX.addPoint(1);
+           playerXScore.textContent= playerX.getPoint();
            console.log(`Der Gewinner ist ${playerX.getName()}`);
            return 
         }
         if(GameBoard.checkWinn(playerO.getSymbol())){
 
+            playerO.addPoint(1);
+            console.log(playerO.getPoint())
+            playerOScore.textContent = playerO.getPoint();
             console.log(`Der Gewinner ist ${playerO.getName()}`);
             return 
         }
        
 
     }
+
+    
 
     const boardClick = (cell) => {
 
