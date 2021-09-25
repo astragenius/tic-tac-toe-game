@@ -31,6 +31,7 @@ const Player = (name, symbol, num, status) => {
 const GameBoard = (() => {
 
     const resetBtn = document.getElementById("resetBtn");
+    const cell = document.querySelectorAll('.cell');
 
     let board = [];
 
@@ -70,16 +71,34 @@ const GameBoard = (() => {
 
     }
 
-    const checkWinn = () => {
+    const checkWinn = (playerSymbol) => {
 
-        // checkt das aktuelle gameBoard ob ein sieger feststeht.
-        // ob das gleiche symbol in einer reiher oder queer ist.
-        // und wenn welches symbol gewonnen hatt.
+        let winCombo = [
+
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        return winCombo.some(combination => {
+             return combination.every(index => {
+                
+                return cell[index].classList.contains(playerSymbol);
+                
+            })
+        })
+        
+
     }
 
 
 
-    return {createBoard, resetBoard}
+    return {createBoard, resetBoard, checkWinn}
 
 
 })();
@@ -103,38 +122,57 @@ const Game = (() => {
 
     const init = () => {
 
-        
+       
         boardClick(cell);
-        GameBoard.resetBoard();
-        
+        GameBoard.resetBoard();  
+    }
+
+
+  
+
+
+    const winner = () => {
+
+        if(GameBoard.checkWinn(playerX.getSymbol())) {
+
+           console.log(`Der Gewinner ist ${playerX.getName()}`);
+           return 
+        }
+        if(GameBoard.checkWinn(playerO.getSymbol())){
+
+            console.log(`Der Gewinner ist ${playerO.getName()}`);
+            return 
+        }
        
 
     }
 
-
-   
-
     const boardClick = (cell) => {
 
+       
        
 
         //setzt symbol wenn auf das Gameboard geklickt wird.
         cell.forEach( (el) => {
 
             el.addEventListener('click', function(e) {
-                
-                if(playerX.getStatus() == true && e.target.classList == 'cell'){
 
-                    e.target.classList.add(playerX.getSymbol());
-                    playerX.setStatus(); // playerX == false
-                    playerO.setStatus(); // playerO == true
-                } 
-                if(playerO.getStatus() == true && e.target.classList == 'cell') {
 
-                    e.target.classList.add(playerO.getSymbol());
-                    playerO.setStatus(); // playerO == false;
-                    playerX.setStatus(); // playerX == true;
-                }
+                    if(playerX.getStatus() == true && e.target.classList == 'cell'){
+
+                        e.target.classList.add(playerX.getSymbol());
+                        playerX.setStatus(); // playerX == false
+                        playerO.setStatus(); // playerO == true
+                        winner();
+                    } 
+                    if(playerO.getStatus() == true && e.target.classList == 'cell') {
+    
+                        e.target.classList.add(playerO.getSymbol());
+                        playerO.setStatus(); // playerO == false;
+                        playerX.setStatus(); // playerX == true;
+                        winner();
+                    }
+
 
             })
         })
@@ -166,13 +204,15 @@ const Game = (() => {
 
    
     
-    return {init, boardClick}
+    return {init, boardClick, winner}
 
 
 
 })();
 
 Game.init()
+
+
 
 
 
