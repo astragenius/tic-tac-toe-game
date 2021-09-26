@@ -32,7 +32,7 @@ const GameBoard = (() => {
 
     const resetBtn = document.getElementById("resetBtn");
     const cell = document.querySelectorAll('.cell');
-
+    
 
     const resetBoard = () => {
         const cell = document.querySelectorAll('.cell');
@@ -103,6 +103,7 @@ const Game = (() => {
     const playerX = Player("PlayerX", "x", 0, true);
     let playerXScore = document.getElementById("player1");
     let playerOScore = document.getElementById('player2');
+    const game_board = document.getElementById('game_board');
     
    
 
@@ -110,8 +111,25 @@ const Game = (() => {
 
        
         boardClick(cell);
-        GameBoard.resetBoard();  
+        GameBoard.resetBoard(); 
+       
         
+    }
+
+
+    const setBoardClass = () => {
+
+        if(playerX.getStatus() == true) {
+
+            game_board.classList.remove('circle');
+            game_board.classList.add('x');
+            return
+        }
+        if(playerO.getStatus() == true) {
+
+            game_board.classList.remove('x');
+            game_board.classList.add('circle');
+        }
     }
 
 
@@ -125,6 +143,7 @@ const Game = (() => {
            playerX.addPoint(1);
            playerXScore.textContent= playerX.getPoint();
            console.log(`Der Gewinner ist ${playerX.getName()}`);
+           reset();
            return 
         }
         if(GameBoard.checkWinn(playerO.getSymbol())){
@@ -133,10 +152,27 @@ const Game = (() => {
             console.log(playerO.getPoint())
             playerOScore.textContent = playerO.getPoint();
             console.log(`Der Gewinner ist ${playerO.getName()}`);
+            reset();
             return 
         }
        
 
+    }
+
+    const reset = () => {
+
+        cell.forEach(el => {
+
+            if(el.classList[1] == "x"){
+
+                el.classList.remove("x");
+                
+            }
+            if(el.classList[1] == "circle") {
+
+                el.classList.remove('circle');
+            }
+        })
     }
 
     
@@ -157,13 +193,16 @@ const Game = (() => {
                         e.target.classList.add(playerX.getSymbol());
                         playerX.setStatus(); // playerX == false
                         playerO.setStatus(); // playerO == true
+                        setBoardClass();
                         winner();
                     } 
                     if(playerO.getStatus() == true && e.target.classList == 'cell') {
-    
+                        
+                        
                         e.target.classList.add(playerO.getSymbol());
                         playerO.setStatus(); // playerO == false;
                         playerX.setStatus(); // playerX == true;
+                        setBoardClass()
                         winner();
                     }
 
